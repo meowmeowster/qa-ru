@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  server:
+    build: build/
+    ports:
+      - 5000:5000
+    depends_on:
+      - database
+  database:
+    image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app
+
+volumes:
+    db-data:
