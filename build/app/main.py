@@ -19,7 +19,7 @@ def read_root():
   <title>Загрузка файла</title>
  </head>
  <body>
-тест
+initial commit
  </body>
 </html>
     """
