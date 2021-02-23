@@ -6,3 +6,5 @@ Pillow~=8.1.0
 pydantic~=1.7.3
 transcrypt~=3.7.16
 PyYaml~=5.4.1
+python-dotenv~=0.15.0
+python-multipart~=0.0.5

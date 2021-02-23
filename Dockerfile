@@ -2,12 +2,13 @@ FROM python:3.8
 
 WORKDIR /code
 
-COPY app/requirements.txt .
+COPY build/app/requirements.txt .
+COPY .env .
 
 RUN pip install --upgrade pip
 RUN pip install python-multipart
 RUN pip install -r requirements.txt
 
-COPY app/ .
+COPY build/app .
 
 CMD [ "python", "./server.py" ]

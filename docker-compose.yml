@@ -2,7 +2,7 @@ version: "3"
 
 services:
   server:
-    build: build/
+    build: ./
     ports:
       - '${LOCAL_PORT}:${CONTAINER_PORT}'
     depends_on:
@@ -12,7 +12,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
-      - '${DB_LOCAL_PORT}:${DB_CONTAINER_PORT}'- "5433:5432"
+      - '${DB_LOCAL_PORT}:${DB_CONTAINER_PORT}'
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
