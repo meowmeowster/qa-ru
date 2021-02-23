@@ -1,0 +1,10 @@
+server:
+  local-port:
+  - 5000
+  container-port:
+  - 5000
+db:
+  local-port:
+  - 5433
+  container-port:
+  - 5432

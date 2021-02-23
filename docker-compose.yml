@@ -4,7 +4,7 @@ services:
   server:
     build: build/
     ports:
-      - 5000:5000
+      - '${LOCAL_PORT}:${CONTAINER_PORT}'
     depends_on:
       - database
   database:
@@ -12,11 +12,10 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - '${DB_LOCAL_PORT}:${DB_CONTAINER_PORT}'- "5433:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: app
-
 volumes:
     db-data:
