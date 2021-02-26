@@ -3,6 +3,11 @@
 
 import os
 from read_env import read_env
+import logging
+import datetime
+
+
+logging.basicConfig(filename="./logs/"+str(datetime.date.today())+".log", level=logging.DEBUG)
 
 
 def get_value(key):
@@ -10,8 +15,8 @@ def get_value(key):
         read_env()
         return os.environ[key]
     except FileNotFoundError:
-        print("Dotenv file not found")
+        logging.error("Dotenv file not found")
         return None
     except Exception:
-        print("Other exception")
+        logging.error("Other exception")
         return None

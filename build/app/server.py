@@ -16,11 +16,11 @@ def get_default_port():
 
 
 logging.basicConfig(filename="./logs/"+str(datetime.date.today())+".log", level=logging.DEBUG)
-app_port = int(safe.get_value('CONTAINER_PORT'))
+app_port = safe.get_value('CONTAINER_PORT')
 logging.debug("Trying to get env info: " + str(app_port))
 if app_port is None:
     app_port = get_default_port()
-    logging.debug("Using default port: " + str(app_port))
+    logging.error("Env getting failed. Using default port: " + str(app_port))
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=app_port, log_level="info")
+    uvicorn.run("main:app", host="0.0.0.0", port=int(app_port), log_level="info")
