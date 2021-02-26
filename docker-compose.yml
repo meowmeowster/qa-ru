@@ -14,8 +14,8 @@ services:
     ports:
       - '${DB_LOCAL_PORT}:${DB_CONTAINER_PORT}'
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: app
+      POSTGRES_USER: '${DB_USER}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD}'
+      POSTGRES_DB: '${DB_APP}'
 volumes:
     db-data:

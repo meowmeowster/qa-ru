@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from fastapi import FastAPI, File, UploadFile, Response
 from pydantic import BaseModel
 
