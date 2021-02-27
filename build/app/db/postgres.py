@@ -28,14 +28,25 @@ def connect(hostname):
         return None
 
 
-def construct(conn):
+def execute_sql(conn, addr):
     cursor = conn.cursor()
     conn.autocommit = True
 
-    workdir = "./db/ddl/"
+    workdir = addr
     for file in os.listdir(workdir):
         if file.endswith(".sql"):
             cursor.execute(open(workdir+file).read())
+
+
+def cleanup(conn):
+    try:
+        execute_sql(conn, "./db/ddl/drop/")
+    except psycopg2.Error:
+        logger.error("Unable to drop all schemas")
+
+
+def construct(conn):
+    execute_sql(conn, "./db/ddl/create/")
 
 
 def conn_close(conn):

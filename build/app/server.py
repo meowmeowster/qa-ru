@@ -30,7 +30,10 @@ if __name__ == "__main__":
     app_port = get_port()
     connection = postgres.connect(instance.db_host())
     if connection is not None:
+        postgres.cleanup(connection)
+        logger.info("Cleaned up the database")
         postgres.construct(connection)
+        logger.info("Created schemas and tables")
         postgres.conn_close(connection)
     uvicorn.run("main:app", host="0.0.0.0", port=app_port, log_level="debug")
 

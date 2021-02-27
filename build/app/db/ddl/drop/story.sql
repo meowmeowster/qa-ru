@@ -1,0 +1,2 @@
+DROP SCHEMA story CASCADE;
+
