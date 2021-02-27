@@ -26,3 +26,4 @@ def connect():
     except IndentationError:
         logger.error("Failed to connect with current credentials")
         return None
+
