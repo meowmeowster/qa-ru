@@ -6,9 +6,9 @@ CREATE SCHEMA metadata AUTHORIZATION postgres;
 
 -- Drop table
 
--- DROP TABLE russian;
+-- DROP TABLE metadata.russian;
 
-CREATE TABLE russian (
+CREATE TABLE metadata.russian (
 	id int8 NOT NULL,
 	"table" varchar NULL,
 	"content" varchar NULL,
@@ -19,9 +19,9 @@ CREATE TABLE russian (
 
 -- Drop table
 
--- DROP TABLE "user";
+-- DROP TABLE metadata."user";
 
-CREATE TABLE "user" (
+CREATE TABLE metadata."user" (
 	id int8 NOT NULL GENERATED ALWAYS AS IDENTITY,
 	"name" varchar NOT NULL,
 	"language" varchar NOT NULL,
@@ -32,9 +32,9 @@ CREATE TABLE "user" (
 
 -- Drop table
 
--- DROP TABLE client;
+-- DROP TABLE metadata.client;
 
-CREATE TABLE client (
+CREATE TABLE metadata.client (
 	app_build varchar NULL,
 	is_production bool NULL,
 	debug_mode bool NULL
