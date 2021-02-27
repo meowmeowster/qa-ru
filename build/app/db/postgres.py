@@ -49,6 +49,10 @@ def construct(conn):
     execute_sql(conn, "./db/ddl/create/")
 
 
+def fill(conn):
+    execute_sql(conn, "./db/initial/insert/")
+
+
 def conn_close(conn):
     cursor = conn.cursor()
     cursor.close()

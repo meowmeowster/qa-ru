@@ -34,6 +34,9 @@ if __name__ == "__main__":
         logger.info("Cleaned up the database")
         postgres.construct(connection)
         logger.info("Created schemas and tables")
+        postgres.fill(connection)
+        logger.info("Filled up the tables")
+
         postgres.conn_close(connection)
     uvicorn.run("main:app", host="0.0.0.0", port=app_port, log_level="debug")
 
