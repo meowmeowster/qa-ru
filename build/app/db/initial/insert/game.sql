@@ -1,2 +1,2 @@
-INSERT INTO story.game (id,"name")
-	VALUES (1,'menu');
+INSERT INTO story.game ("name")
+	VALUES ('menu');
