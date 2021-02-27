@@ -2,10 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import uvicorn
-from auth import safe
+from auth import safe, instance
 from db import postgres
 from log_service import set_logs
-
 
 logger = set_logs()
 
@@ -29,8 +28,9 @@ def get_port():
 
 if __name__ == "__main__":
     app_port = get_port()
-    connection = postgres.connect()
-    postgres.construct(connection)
-    postgres.conn_close(connection)
+    connection = postgres.connect(instance.db_host())
+    if connection is not None:
+        postgres.construct(connection)
+        postgres.conn_close(connection)
     uvicorn.run("main:app", host="0.0.0.0", port=app_port, log_level="debug")
 
