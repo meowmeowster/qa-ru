@@ -29,6 +29,8 @@ def get_port():
 
 if __name__ == "__main__":
     app_port = get_port()
-    cursor = postgres.connect()
+    connection = postgres.connect()
+    postgres.construct(connection)
+    postgres.conn_close(connection)
     uvicorn.run("main:app", host="0.0.0.0", port=app_port, log_level="debug")
 
