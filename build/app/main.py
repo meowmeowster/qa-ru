@@ -19,21 +19,21 @@ def read_root():
 <html>
  <head>
   <meta charset="utf-8" />
-  <title>Загрузка файла</title>
+  <title>фронтенд, привет!</title>
  </head>
  <body>
-initial commit
+
  </body>
 </html>
     """
     return Response(content=data, media_type="application/xml")
 
 
-@app.post("/api/predict/")
-async def predict_from_string(item: Item):
+@app.post("/api/string/")
+async def from_string(item: Item):
     return "1"
 
 
-@app.post("/api/upload/")
-async def predict_from_file(file: UploadFile = File(...)):
+@app.post("/api/file/")
+async def from_file(file: UploadFile = File(...)):
     return "2"

@@ -3,8 +3,10 @@
 
 import psycopg2
 from auth import safe
-import logging
-import datetime
+from log_service import set_logs
+
+
+logger = set_logs()
 
 
 def connect():
@@ -16,11 +18,11 @@ def connect():
         conn = psycopg2.connect(dbname=db_app, user=db_user,
                                 password=db_password, host="localhost", port=db_local_port)
         cursor = conn.cursor()
-        logging.info("Connected to the database!")
+        logger.info("Connected to the database!")
         return cursor
     except psycopg2.OperationalError:
-        logging.error("Failed connecting to the database on localhost:"+db_local_port)
+        logger.error("Failed connecting to the database on localhost:"+db_local_port)
         return None
     except IndentationError:
-        logging.error("Failed to connect with current credentials")
+        logger.error("Failed to connect with current credentials")
         return None

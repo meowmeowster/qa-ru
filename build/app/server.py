@@ -4,8 +4,10 @@
 import uvicorn
 from auth import safe
 from db import postgres
-import logging
-import datetime
+from log_service import set_logs
+
+
+logger = set_logs()
 
 
 async def app(scope, receive, send):
@@ -16,13 +18,17 @@ def get_default_port():
     return 5000
 
 
-logging.basicConfig(filename="./logs/"+str(datetime.date.today())+".log", level=logging.DEBUG)
-app_port = safe.get_value('CONTAINER_PORT')
-logging.debug("Trying to get env info: " + str(app_port))
-if app_port is None:
-    app_port = get_default_port()
-    logging.warning("Env getting failed. Using default port: " + str(app_port))
+def get_port():
+    port = safe.get_value('CONTAINER_PORT')
+    logger.debug("Trying to get env info: " + str(port))
+    if port is None:
+        port = get_default_port()
+        logger.warning("Env getting failed. Using default port: " + str(port))
+    return int(port)
+
 
 if __name__ == "__main__":
+    app_port = get_port()
     cursor = postgres.connect()
-    uvicorn.run("main:app", host="0.0.0.0", port=int(app_port), log_level="info")
+    uvicorn.run("main:app", host="0.0.0.0", port=app_port, log_level="debug")
+
