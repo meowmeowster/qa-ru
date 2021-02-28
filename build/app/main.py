@@ -3,6 +3,7 @@
 
 from fastapi import FastAPI, File, UploadFile, Response
 from pydantic import BaseModel
+import html_gen
 
 
 class Item(BaseModel):
@@ -14,19 +15,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    data = """
-<!DOCTYPE html>
-<html>
- <head>
-  <meta charset="utf-8" />
-  <title>фронтенд, привет!</title>
- </head>
- <body>
-
- </body>
-</html>
-    """
-    return Response(content=data, media_type="application/xml")
+    return Response(content=html_gen.homepage(), media_type="application/xml")
 
 
 @app.post("/api/string/")

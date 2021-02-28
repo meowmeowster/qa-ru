@@ -28,14 +28,27 @@ def connect(hostname):
         return None
 
 
-def execute_sql(conn, addr):
+def execute_sql(conn, address, catalog=True, getresult=False):
+    result = []
     cursor = conn.cursor()
     conn.autocommit = True
-
-    workdir = addr
-    for file in os.listdir(workdir):
-        if file.endswith(".sql"):
-            cursor.execute(open(workdir+file).read())
+    work_dir = address
+    logger.debug("Executing SQL files at " + address)
+    if catalog:
+        logger.debug("Directory mode")
+        for file in os.listdir(work_dir):
+            if file.endswith(".sql"):
+                cursor.execute(open(work_dir + file).read())
+                if getresult:
+                    result.append(cursor.fetchall())
+    else:
+        logger.debug("Single file mode")
+        cursor.execute(open(work_dir).read())
+        if getresult:
+            result.append(cursor.fetchall())
+    if getresult:
+        logger.debug("Requested script result")
+        return result
 
 
 def cleanup(conn):
@@ -51,6 +64,10 @@ def construct(conn):
 
 def fill(conn):
     execute_sql(conn, "./db/initial/insert/")
+
+
+def read_sql(conn, string, catalog):
+    return execute_sql(conn, string, catalog, True)
 
 
 def conn_close(conn):
