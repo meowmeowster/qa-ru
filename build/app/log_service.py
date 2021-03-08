@@ -8,7 +8,11 @@ import coloredlogs
 
 
 def set_logs():
-    logging.basicConfig(filename="./logs/"+str(datetime.date.today())+".log", level=logging.DEBUG)
-    logger_init = logging.getLogger(__name__)
-    coloredlogs.install()
-    return logger_init
+    try:
+        logging.basicConfig(filename="./logs/"+str(datetime.date.today())+".log", level=logging.DEBUG)
+        logger_init = logging.getLogger(__name__)
+        coloredlogs.install()
+        return logger_init
+    except FileNotFoundError:
+        print("Can't write file")
+        return None

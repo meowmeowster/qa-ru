@@ -9,6 +9,7 @@ from log_service import set_logs
 logger = set_logs()
 
 
+
 async def app(scope, receive, send):
     ...
 
@@ -19,10 +20,10 @@ def get_default_port():
 
 def get_port():
     port = safe.get_value('CONTAINER_PORT')
-    logger.debug("Trying to get env info: " + str(port))
+    #logger.debug("Trying to get env info: " + str(port))
     if port is None:
         port = get_default_port()
-        logger.warning("Env getting failed. Using default port: " + str(port))
+        #logger.warning("Env getting failed. Using default port: " + str(port))
     return int(port)
 
 
@@ -31,11 +32,11 @@ if __name__ == "__main__":
     connection = postgres.connect(instance.db_host())
     if connection is not None:
         postgres.cleanup(connection)
-        logger.info("Cleaned up the database")
+        #logger.info("Cleaned up the database")
         postgres.construct(connection)
-        logger.info("Created schemas and tables")
+        #logger.info("Created schemas and tables")
         postgres.fill(connection)
-        logger.info("Filled up the tables")
+        #logger.info("Filled up the tables")
 
         postgres.conn_close(connection)
     uvicorn.run("main:app", host="0.0.0.0", port=app_port, log_level="debug")

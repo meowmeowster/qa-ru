@@ -18,13 +18,13 @@ def connect(hostname):
     try:
         conn = psycopg2.connect(dbname=db_app, user=db_user,
                                 password=db_password, host=hostname, port=db_port)
-        logger.info("Connected to the database!")
+        #logger.info("Connected to the database!")
         return conn
     except psycopg2.OperationalError:
-        logger.error("Failed connecting to the database on" + hostname + ": " + db_port)
+        #logger.error("Failed connecting to the database on" + hostname + ": " + db_port)
         return None
     except IndentationError:
-        logger.error("Failed to connect with current credentials")
+        #logger.error("Failed to connect with current credentials")
         return None
 
 
@@ -33,21 +33,21 @@ def execute_sql(conn, address, catalog=True, getresult=False):
     cursor = conn.cursor()
     conn.autocommit = True
     work_dir = address
-    logger.debug("Executing SQL files at " + address)
+    #logger.debug("Executing SQL files at " + address)
     if catalog:
-        logger.debug("Directory mode")
+        #logger.debug("Directory mode")
         for file in os.listdir(work_dir):
             if file.endswith(".sql"):
                 cursor.execute(open(work_dir + file).read())
                 if getresult:
                     result.append(cursor.fetchall())
     else:
-        logger.debug("Single file mode")
+        #logger.debug("Single file mode")
         cursor.execute(open(work_dir).read())
         if getresult:
             result.append(cursor.fetchall())
     if getresult:
-        logger.debug("Requested script result")
+        #logger.debug("Requested script result")
         return result
 
 
@@ -55,7 +55,8 @@ def cleanup(conn):
     try:
         execute_sql(conn, "./db/ddl/drop/")
     except psycopg2.Error:
-        logger.error("Unable to drop all schemas")
+        print("Unable to drop all schemas")
+        #logger.error("Unable to drop all schemas")
 
 
 def construct(conn):

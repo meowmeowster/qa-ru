@@ -15,8 +15,8 @@ def get_value(key):
         read_env()
         return os.environ[key]
     except FileNotFoundError:
-        logger.error("Dotenv file not found")
+        #logger.error("Dotenv file not found")
         return None
     except Exception:
-        logging.error("Other exception")
+        #logging.error("Other exception")
         return None
