@@ -10,5 +10,6 @@ RUN pip install python-multipart
 RUN pip install -r requirements.txt
 
 COPY build/app .
+RUN chmod 777 /code
 
 CMD [ "python", "./server.py" ]
